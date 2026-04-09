@@ -1,0 +1,229 @@
+{
+  "main": {
+    "id": "42390e038e99294a",
+    "type": "split",
+    "children": [
+      {
+        "id": "519ca52b22101e69",
+        "type": "tabs",
+        "children": [
+          {
+            "id": "9e1d56d13bcfb34b",
+            "type": "leaf",
+            "state": {
+              "type": "markdown",
+              "state": {
+                "file": "notes/精调.md",
+                "mode": "source",
+                "source": false
+              },
+              "icon": "lucide-file",
+              "title": "精调"
+            }
+          }
+        ]
+      }
+    ],
+    "direction": "vertical"
+  },
+  "left": {
+    "id": "2105ff742fbce96f",
+    "type": "split",
+    "children": [
+      {
+        "id": "a5bf4c93f948a436",
+        "type": "tabs",
+        "children": [
+          {
+            "id": "6ea4c3ae44697a5b",
+            "type": "leaf",
+            "state": {
+              "type": "file-explorer",
+              "state": {
+                "sortOrder": "alphabetical",
+                "autoReveal": false
+              },
+              "icon": "lucide-folder-closed",
+              "title": "文件列表"
+            }
+          },
+          {
+            "id": "0e9e3ec8bf566a88",
+            "type": "leaf",
+            "state": {
+              "type": "search",
+              "state": {
+                "query": "",
+                "matchingCase": false,
+                "explainSearch": false,
+                "collapseAll": false,
+                "extraContext": false,
+                "sortOrder": "alphabetical"
+              },
+              "icon": "lucide-search",
+              "title": "搜索"
+            }
+          },
+          {
+            "id": "30b06fdd960fbb3c",
+            "type": "leaf",
+            "state": {
+              "type": "bookmarks",
+              "state": {},
+              "icon": "lucide-bookmark",
+              "title": "书签"
+            }
+          }
+        ]
+      }
+    ],
+    "direction": "horizontal",
+    "width": 300
+  },
+  "right": {
+    "id": "e87de951e57a2f91",
+    "type": "split",
+    "children": [
+      {
+        "id": "e06975af2700cc34",
+        "type": "tabs",
+        "children": [
+          {
+            "id": "be6ebdef1394ee36",
+            "type": "leaf",
+            "state": {
+              "type": "backlink",
+              "state": {
+                "file": "notes/精调.md",
+                "collapseAll": false,
+                "extraContext": false,
+                "sortOrder": "alphabetical",
+                "showSearch": false,
+                "searchQuery": "",
+                "backlinkCollapsed": false,
+                "unlinkedCollapsed": true
+              },
+              "icon": "links-coming-in",
+              "title": "精调 的反向链接列表"
+            }
+          },
+          {
+            "id": "3ff1b79a5895ef19",
+            "type": "leaf",
+            "state": {
+              "type": "outgoing-link",
+              "state": {
+                "file": "notes/精调.md",
+                "linksCollapsed": false,
+                "unlinkedCollapsed": true
+              },
+              "icon": "links-going-out",
+              "title": "精调 的出链列表"
+            }
+          },
+          {
+            "id": "bffece87688c567b",
+            "type": "leaf",
+            "state": {
+              "type": "tag",
+              "state": {
+                "sortOrder": "frequency",
+                "useHierarchy": true,
+                "showSearch": false,
+                "searchQuery": ""
+              },
+              "icon": "lucide-tags",
+              "title": "标签"
+            }
+          },
+          {
+            "id": "d01430432544376d",
+            "type": "leaf",
+            "state": {
+              "type": "all-properties",
+              "state": {
+                "sortOrder": "frequency",
+                "showSearch": false,
+                "searchQuery": ""
+              },
+              "icon": "lucide-archive",
+              "title": "添加笔记属性"
+            }
+          },
+          {
+            "id": "24f5dae5822e4ef8",
+            "type": "leaf",
+            "state": {
+              "type": "outline",
+              "state": {
+                "file": "notes/精调.md",
+                "followCursor": false,
+                "showSearch": false,
+                "searchQuery": ""
+              },
+              "icon": "lucide-list",
+              "title": "精调 的大纲"
+            }
+          }
+        ]
+      }
+    ],
+    "direction": "horizontal",
+    "width": 300,
+    "collapsed": true
+  },
+  "left-ribbon": {
+    "hiddenItems": {
+      "switcher:打开快速切换": false,
+      "graph:查看关系图谱": false,
+      "canvas:新建白板": false,
+      "daily-notes:打开/创建今天的日记": false,
+      "templates:插入模板": false,
+      "command-palette:打开命令面板": false,
+      "bases:新建数据库": false
+    }
+  },
+  "active": "9e1d56d13bcfb34b",
+  "lastOpenFiles": [
+    "attachments/Clipboard_2025-07-11-18-45-49.png",
+    "attachments/Clipboard_2025-07-11-11-31-44.png",
+    "notes/openclaw 命令.md",
+    "notes/Untitled (2).md",
+    "notes/verl.md",
+    "notes/vibe coding.md",
+    "notes/kiro spec.md",
+    "notes/个人总结.md",
+    "notes/产品设计.md",
+    "_notable_deleted/notes/遇见的问题.md",
+    "_notable_deleted/notes/转正ppt分配.md",
+    "_notable_deleted/notes/讲稿.md",
+    "_notable_deleted/notes/简历内容丰富.md",
+    "_notable_deleted/notes/笔记.md",
+    "_notable_deleted/notes/服务发现.md",
+    "_notable_deleted/notes/提问.md",
+    "_notable_deleted/notes/提前批准备.md",
+    "_notable_deleted/notes/强化学习发展.md",
+    "_notable_deleted/notes/强化.md",
+    "_notable_deleted/notes/工作内容.md",
+    "_notable_deleted/notes/太湖.md",
+    "_notable_deleted/notes/会议记录.md",
+    "_notable_deleted/notes/代码框架.md",
+    "_notable_deleted/notes/python.md",
+    "_notable_deleted/notes/plan.md",
+    "_notable_deleted/notes/learning.md",
+    "_notable_deleted/notes/hunyuan总结.md",
+    "_notable_deleted/notes",
+    "attachments/Clipboard_2025-07-24-09-38-28.png",
+    "attachments/Clipboard_2025-07-22-09-38-06.png",
+    "attachments/Clipboard_2025-07-23-11-18-10.png",
+    "attachments/Clipboard_2025-07-23-09-26-02.png",
+    "attachments/Clipboard_2025-07-22-09-41-49.png",
+    "attachments/Clipboard_2025-07-23-09-07-36.png",
+    "attachments/Clipboard_2025-07-16-14-29-19.png",
+    "attachments/Clipboard_2025-07-23-11-17-51.png",
+    "attachments/Clipboard_2025-07-23-09-19-20.png",
+    "_notable_deleted",
+    "attachments",
+    "notes"
+  ]
+}
