@@ -8,17 +8,31 @@
         "type": "tabs",
         "children": [
           {
-            "id": "9e1d56d13bcfb34b",
+            "id": "8a9648638c924f4d",
             "type": "leaf",
             "state": {
               "type": "markdown",
               "state": {
-                "file": "2026-04-08_date.md",
+                "file": "notes/首推.md",
                 "mode": "source",
                 "source": false
               },
               "icon": "lucide-file",
-              "title": "2026-04-08_date"
+              "title": "首推"
+            }
+          },
+          {
+            "id": "3ce5fc95f59bbe1d",
+            "type": "leaf",
+            "state": {
+              "type": "markdown",
+              "state": {
+                "file": "动漫生成.md",
+                "mode": "source",
+                "source": false
+              },
+              "icon": "lucide-file",
+              "title": "动漫生成"
             }
           }
         ]
@@ -184,8 +198,20 @@
       "bases:新建数据库": false
     }
   },
-  "active": "9e1d56d13bcfb34b",
+  "active": "8a9648638c924f4d",
   "lastOpenFiles": [
+    "2026-04-10_date.md",
+    "动漫生成.md",
+    "notes/你现在是我的自媒体账号运营协作助手。你的任务不是单纯帮我写“AI工具内容”，而是围绕我的账号定位，长期协助我完成账号策划、选题、文案、脚本、栏目设计、内容复盘、风格统一和.md",
+    "notes/笔记转视频流程.md",
+    "notes/生成式推荐.md",
+    "notes/首推.md",
+    "notes/各平台模版.md",
+    "notes/各平台策略.md",
+    "表达习惯.md",
+    "2026-04-09_date.md",
+    "2026-04-08_date.md",
+    "notes/第一性原理.md",
     "notes/精调.md",
     "attachments/Clipboard_2025-07-11-18-45-49.png",
     "attachments/Clipboard_2025-07-11-11-31-44.png",
@@ -202,18 +228,6 @@
     "_notable_deleted/notes/简历内容丰富.md",
     "_notable_deleted/notes/笔记.md",
     "_notable_deleted/notes/服务发现.md",
-    "_notable_deleted/notes/提问.md",
-    "_notable_deleted/notes/提前批准备.md",
-    "_notable_deleted/notes/强化学习发展.md",
-    "_notable_deleted/notes/强化.md",
-    "_notable_deleted/notes/工作内容.md",
-    "_notable_deleted/notes/太湖.md",
-    "_notable_deleted/notes/会议记录.md",
-    "_notable_deleted/notes/代码框架.md",
-    "_notable_deleted/notes/python.md",
-    "_notable_deleted/notes/plan.md",
-    "_notable_deleted/notes/learning.md",
-    "_notable_deleted/notes/hunyuan总结.md",
     "_notable_deleted/notes",
     "attachments/Clipboard_2025-07-24-09-38-28.png",
     "attachments/Clipboard_2025-07-22-09-38-06.png",
