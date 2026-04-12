@@ -13,30 +13,15 @@
             "state": {
               "type": "markdown",
               "state": {
-                "file": "00-首页.md",
+                "file": "03-项目导航.md",
                 "mode": "source",
                 "source": false
               },
               "icon": "lucide-file",
-              "title": "00-首页"
-            }
-          },
-          {
-            "id": "3ce5fc95f59bbe1d",
-            "type": "leaf",
-            "state": {
-              "type": "markdown",
-              "state": {
-                "file": "动漫生成.md",
-                "mode": "source",
-                "source": false
-              },
-              "icon": "lucide-file",
-              "title": "动漫生成"
+              "title": "03-项目导航"
             }
           }
-        ],
-        "currentTab": 1
+        ]
       }
     ],
     "direction": "vertical"
@@ -109,8 +94,8 @@
             "state": {
               "type": "backlink",
               "state": {
-                "file": "notes/精调.md",
-                "collapseAll": false,
+                "file": "03-项目导航.md",
+                "collapseAll": true,
                 "extraContext": false,
                 "sortOrder": "alphabetical",
                 "showSearch": false,
@@ -119,7 +104,7 @@
                 "unlinkedCollapsed": true
               },
               "icon": "links-coming-in",
-              "title": "精调 的反向链接列表"
+              "title": "03-项目导航 的反向链接列表"
             }
           },
           {
@@ -171,13 +156,13 @@
             "state": {
               "type": "outline",
               "state": {
-                "file": "notes/精调.md",
+                "file": "03-项目导航.md",
                 "followCursor": false,
                 "showSearch": false,
                 "searchQuery": ""
               },
               "icon": "lucide-list",
-              "title": "精调 的大纲"
+              "title": "03-项目导航 的大纲"
             }
           }
         ]
@@ -199,36 +184,36 @@
       "bases:新建数据库": false
     }
   },
-  "active": "6ea4c3ae44697a5b",
+  "active": "8a9648638c924f4d",
   "lastOpenFiles": [
+    "动漫生成.md",
+    "欢迎.md",
+    "表达习惯.md",
+    "03-项目导航.md",
+    "02-主题导航.md",
+    "01-日志导航.md",
+    "00-知识库搭建方案.md",
+    "2026-04-08_date.md",
     "00-首页.md",
+    "2026-04-11_date.md",
+    "惯性定律.md",
+    "三大运动定律.md",
+    "艾萨克·牛顿.md",
     "conflict-files-obsidian-git.md",
     "notes/首推.md",
     "2026-04-10_date.md",
-    "动漫生成.md",
     "notes/你现在是我的自媒体账号运营协作助手。你的任务不是单纯帮我写“AI工具内容”，而是围绕我的账号定位，长期协助我完成账号策划、选题、文案、脚本、栏目设计、内容复盘、风格统一和.md",
     "notes/笔记转视频流程.md",
     "notes/生成式推荐.md",
     "notes/各平台模版.md",
     "notes/各平台策略.md",
-    "表达习惯.md",
     "2026-04-09_date.md",
-    "2026-04-08_date.md",
     "notes/第一性原理.md",
     "notes/精调.md",
     "attachments/Clipboard_2025-07-11-18-45-49.png",
     "attachments/Clipboard_2025-07-11-11-31-44.png",
     "notes/openclaw 命令.md",
     "notes/Untitled (2).md",
-    "notes/verl.md",
-    "notes/vibe coding.md",
-    "notes/kiro spec.md",
-    "notes/个人总结.md",
-    "notes/产品设计.md",
-    "_notable_deleted/notes/遇见的问题.md",
-    "_notable_deleted/notes/转正ppt分配.md",
-    "_notable_deleted/notes/讲稿.md",
-    "_notable_deleted/notes/简历内容丰富.md",
     "_notable_deleted/notes",
     "attachments/Clipboard_2025-07-24-09-38-28.png",
     "attachments/Clipboard_2025-07-22-09-38-06.png",
