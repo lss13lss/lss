@@ -13,12 +13,22 @@
             "state": {
               "type": "markdown",
               "state": {
-                "file": "03-项目导航.md",
+                "file": "notes/分词.md",
                 "mode": "source",
-                "source": false
+                "source": false,
+                "backlinks": true,
+                "backlinkOpts": {
+                  "collapseAll": false,
+                  "extraContext": false,
+                  "sortOrder": "alphabetical",
+                  "showSearch": false,
+                  "searchQuery": "",
+                  "backlinkCollapsed": false,
+                  "unlinkedCollapsed": true
+                }
               },
               "icon": "lucide-file",
-              "title": "03-项目导航"
+              "title": "分词"
             }
           }
         ]
@@ -94,7 +104,7 @@
             "state": {
               "type": "backlink",
               "state": {
-                "file": "03-项目导航.md",
+                "file": "notes/分词.md",
                 "collapseAll": true,
                 "extraContext": false,
                 "sortOrder": "alphabetical",
@@ -104,7 +114,7 @@
                 "unlinkedCollapsed": true
               },
               "icon": "links-coming-in",
-              "title": "03-项目导航 的反向链接列表"
+              "title": "分词 的反向链接列表"
             }
           },
           {
@@ -169,8 +179,7 @@
       }
     ],
     "direction": "horizontal",
-    "width": 300,
-    "collapsed": true
+    "width": 300
   },
   "left-ribbon": {
     "hiddenItems": {
@@ -186,11 +195,18 @@
   },
   "active": "8a9648638c924f4d",
   "lastOpenFiles": [
+    "notes/LLM总结.md",
+    "02-主题导航.md",
     "00-知识库搭建方案.md",
-    "03-项目/账号运营/AI 账号定位.md",
+    "02-主题/工作方法/第一性原理.md",
+    "02-主题/AI与LLM/等待AGI？NO.md",
+    "02-主题/内容创作/产品设计.md",
+    "06-素材导航.md",
+    "06-素材/零散记录/笔记转视频流程.md",
     "notes/首推.md",
-    "notes/给你一个整数序列，求和为S的最长连续子序列.md",
     "03-项目导航.md",
+    "03-项目/账号运营/AI 账号定位.md",
+    "notes/给你一个整数序列，求和为S的最长连续子序列.md",
     "未命名.md",
     "表达习惯.md",
     "notes/聊天账号定位：.md",
@@ -199,7 +215,6 @@
     "07-模板/项目模板.md",
     "07-模板/主题模板.md",
     "07-模板/日志模板.md",
-    "06-素材导航.md",
     "05-成长导航.md",
     "04-读书导航.md",
     "00-使用规则.md",
@@ -215,13 +230,7 @@
     "04-读书/已读",
     "动漫生成.md",
     "欢迎.md",
-    "02-主题导航.md",
     "01-日志导航.md",
-    "2026-04-08_date.md",
-    "00-首页.md",
-    "2026-04-11_date.md",
-    "惯性定律.md",
-    "三大运动定律.md",
     "attachments/Clipboard_2025-07-11-18-45-49.png",
     "attachments/Clipboard_2025-07-11-11-31-44.png",
     "attachments/Clipboard_2025-07-24-09-38-28.png",
