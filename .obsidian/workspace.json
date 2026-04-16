@@ -4,31 +4,21 @@
     "type": "split",
     "children": [
       {
-        "id": "519ca52b22101e69",
+        "id": "ec0089c3fadfba0f",
         "type": "tabs",
         "children": [
           {
-            "id": "8a9648638c924f4d",
+            "id": "06fe39e78e18d272",
             "type": "leaf",
             "state": {
               "type": "markdown",
               "state": {
-                "file": "notes/分词.md",
+                "file": "04-读书/在读/原子习惯序+第一章.md",
                 "mode": "source",
-                "source": false,
-                "backlinks": true,
-                "backlinkOpts": {
-                  "collapseAll": false,
-                  "extraContext": false,
-                  "sortOrder": "alphabetical",
-                  "showSearch": false,
-                  "searchQuery": "",
-                  "backlinkCollapsed": false,
-                  "unlinkedCollapsed": true
-                }
+                "source": false
               },
               "icon": "lucide-file",
-              "title": "分词"
+              "title": "原子习惯序+第一章"
             }
           }
         ]
@@ -88,7 +78,8 @@
       }
     ],
     "direction": "horizontal",
-    "width": 300
+    "width": 300,
+    "collapsed": true
   },
   "right": {
     "id": "e87de951e57a2f91",
@@ -104,7 +95,7 @@
             "state": {
               "type": "backlink",
               "state": {
-                "file": "notes/分词.md",
+                "file": "未命名.md",
                 "collapseAll": true,
                 "extraContext": false,
                 "sortOrder": "alphabetical",
@@ -114,7 +105,7 @@
                 "unlinkedCollapsed": true
               },
               "icon": "links-coming-in",
-              "title": "分词 的反向链接列表"
+              "title": "未命名 的反向链接列表"
             }
           },
           {
@@ -179,7 +170,8 @@
       }
     ],
     "direction": "horizontal",
-    "width": 300
+    "width": 300,
+    "collapsed": true
   },
   "left-ribbon": {
     "hiddenItems": {
@@ -193,31 +185,40 @@
       "bases:新建数据库": false
     }
   },
-  "active": "8a9648638c924f4d",
+  "active": "06fe39e78e18d272",
   "lastOpenFiles": [
-    "notes/LLM总结.md",
-    "02-主题导航.md",
-    "00-知识库搭建方案.md",
-    "02-主题/工作方法/第一性原理.md",
-    "02-主题/AI与LLM/等待AGI？NO.md",
+    "02-主题/内容创作/首推.md",
+    "skills/personal-style-script-writer/agents/openai.yaml",
+    "skills/personal-style-script-writer/agents",
+    "04-读书/在读/原子习惯序+第一章.md",
+    "04-读书/原子习惯一二章.md",
     "02-主题/内容创作/产品设计.md",
-    "06-素材导航.md",
-    "06-素材/零散记录/笔记转视频流程.md",
-    "notes/首推.md",
-    "03-项目导航.md",
-    "03-项目/账号运营/AI 账号定位.md",
-    "notes/给你一个整数序列，求和为S的最长连续子序列.md",
-    "未命名.md",
-    "表达习惯.md",
-    "notes/聊天账号定位：.md",
-    "07-模板/成长模板.md",
-    "07-模板/读书模板.md",
+    "attachments/6de421618fffe3068739baed0672d0035842e1ba.jpg@1052w_!web-dynamic.webp",
+    "skills/personal-style-script-writer/references/review-and-titles-output.md",
+    "notes/AI打造爆火.md",
+    "notes/langGraph.md",
+    "notes/vibe coding.md",
+    "notes/verl.md",
+    "notes/sft + grpo.md",
+    "notes/skills.md",
+    "notes/LLM总结.md",
+    "skills/personal-style-script-writer/references/original-vs-final-patterns.md",
+    "skills/personal-style-script-writer/references/paged-script-collaboration-pattern.md",
+    "skills/personal-style-script-writer/references/case-first-feature-process.md",
+    "notes/重新学习.md",
+    "skills/personal-style-script-writer/SKILL.md",
     "07-模板/项目模板.md",
-    "07-模板/主题模板.md",
-    "07-模板/日志模板.md",
-    "05-成长导航.md",
+    "03-项目/账号运营/AI 账号定位.md",
+    "03-项目/个人项目/写作风格skill.md",
+    "未命名.md",
+    "未命名",
+    "2026-04-15_date.md",
+    "attachments/Pasted image 20260415094743.png",
     "04-读书导航.md",
-    "00-使用规则.md",
+    "attachments/Pasted image 20260415095448.png",
+    "attachments/Pasted image 20260415095205.png",
+    "2026-04-13_date.md",
+    "02-主题/技术工具/openclaw接入飞书.md",
     "07-模板",
     "06-素材/零散记录",
     "06-素材/截图灵感",
@@ -225,21 +226,11 @@
     "06-素材",
     "05-成长/习惯",
     "05-成长/思考",
-    "05-成长/复盘",
-    "05-成长",
-    "04-读书/已读",
-    "动漫生成.md",
-    "欢迎.md",
-    "01-日志导航.md",
     "attachments/Clipboard_2025-07-11-18-45-49.png",
     "attachments/Clipboard_2025-07-11-11-31-44.png",
     "attachments/Clipboard_2025-07-24-09-38-28.png",
     "attachments/Clipboard_2025-07-22-09-38-06.png",
     "attachments/Clipboard_2025-07-23-11-18-10.png",
-    "attachments/Clipboard_2025-07-23-09-26-02.png",
-    "attachments/Clipboard_2025-07-22-09-41-49.png",
-    "attachments/Clipboard_2025-07-23-09-07-36.png",
-    "attachments/Clipboard_2025-07-16-14-29-19.png",
-    "attachments/Clipboard_2025-07-23-11-17-51.png"
+    "attachments/Clipboard_2025-07-23-09-26-02.png"
   ]
 }
