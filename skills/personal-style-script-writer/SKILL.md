@@ -1,6 +1,6 @@
 ---
 name: personal-style-script-writer
-description: Generate Chinese content in the user's personal style from rough outlines, notes, or fragmented ideas. Use this skill when the user wants content expanded into a polished draft with both a `口播版本` and a `文字版本` by default, especially for short video scripts, platform posts, account-introduction content, or page-based image-text posts that may also need targeted web research, page markers, title suggestions, and preservation of the user's tone, rhythm, and recurring expressions.
+description: Generate Chinese content in the user's personal style from rough outlines, notes, or fragmented ideas. Use this skill when the user wants content expanded into a polished draft with a `口播版本`, a `文字版本`, and a `视频简介` by default, especially for short video scripts, platform posts, account-introduction content, or page-based image-text posts that may also need targeted web research, page markers, title suggestions, and preservation of the user's tone, rhythm, and recurring expressions.
 ---
 
 # Personal Style Script Writer
@@ -109,19 +109,29 @@ When the user's samples show anti-generic preferences, prefer:
 - spoken transitions over neatly symmetrical writing
 - self-observation over grand claims
 
+When the user's final samples resemble the current first-featured article, also prefer:
+
+- real usage pressure over abstract AI awe
+- "缺少实操场景" and "没有真正吸收内化" type framing when the user's problem is input-heavy but practice-light
+- starting from real personal needs rather than generic productivity doctrine
+- "记录真实尝试" over "输出技术教程"
+- growth through ongoing practice rather than one-time awakening language
+
 If the user is drafting content that will later be paired with images, slides, or caption cards, write with page-level segmentation in mind. Each section should carry one core idea and should not mix multiple turns of the argument.
 
-If the user is creating a spoken script for visual pages, explicitly label page breaks in the output. Use a clear format such as:
+If the user is creating a spoken script, paginate it by default unless the user explicitly asks for a single unbroken script. Explicitly label page breaks in the output, and give each page a concise extracted title. Use a clear format such as:
 
 - `【第1页：主题】`
 - `【第2页：主题】`
 
 Keep the page title aligned with the user's logic when they already defined it. If they did not define page titles, infer them from the script structure.
+Each page title should summarize that page's main idea rather than repeat a generic label.
 
 When the user is creating content for publishing rather than only rehearsal, generate two companion versions by default unless they ask for only one:
 
-- `口播版本`: optimized for speaking aloud, with page markers if visuals are involved
+- `口播版本`: optimized for speaking aloud, paginated by default, with an extracted title for every page
 - `文字版本`: optimized for reading on the page, keeping the same core logic but smoothing transitions and removing spoken-only padding
+- `视频简介`: a compressed summary based on the `文字版本`, suitable for use as a video description, intro blurb, or post summary
 
 ### 5. Run A Style Match Check
 
@@ -149,7 +159,8 @@ Unless the user asks otherwise, return:
 
 1. `口播版本`
 2. `文字版本`
-3. A short note with:
+3. `视频简介`
+4. A short note with:
    - assumed audience
    - any research-based additions
    - any style uncertainty that still needs examples from the user
@@ -172,7 +183,8 @@ If the user asks for review plus revision, prefer this output order:
 2. Optimization points and reasons
 3. `口播版本`
 4. `文字版本`
-5. Title options
+5. `视频简介`
+6. Title options
 
 ## Guardrails
 
@@ -187,6 +199,7 @@ If the user asks for review plus revision, prefer this output order:
 - If the user asks for a final draft without further polishing, output their approved wording cleanly rather than re-improving it.
 - When adding page markers, do not silently rewrite the script more than the user asked for.
 - Do not let the `文字版本` drift into a different argument from the `口播版本`; they should be two renderings of the same core content.
+- Keep the `视频简介` meaningfully shorter than the `文字版本`; it should summarize rather than restate.
 
 ## When To Read References
 
@@ -197,3 +210,4 @@ If the user asks for review plus revision, prefer this output order:
 - Read [references/paged-script-collaboration-pattern.md](references/paged-script-collaboration-pattern.md) when the user is iterating a script page by page for video,图文,口播分镜, or slide-based delivery.
 - Read [references/original-vs-final-patterns.md](references/original-vs-final-patterns.md) when the user provides both a rough source draft and a final approved version and you need to infer what they consistently cut, keep, or tighten.
 - Read [references/review-and-titles-output.md](references/review-and-titles-output.md) when the user wants a script reviewed from a creator/operator perspective, wants the reasons behind revisions, or wants title suggestions together with the revised script.
+- Read [references/final-first-feature-style.md](references/final-first-feature-style.md) when the user is writing first-featured content, account motivation content, or any piece that should reflect the latest settled preferences from `首推.md`.

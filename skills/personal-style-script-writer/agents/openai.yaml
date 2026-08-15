@@ -1,7 +1,7 @@
 interface:
   display_name: "Personal Style Writer"
-  short_description: "按个人风格输出口播版和文字版内容"
-  default_prompt: "Use $personal-style-script-writer to turn my notes into both a `口播版本` and a `文字版本`, and add page markers when the spoken version will be paired with visuals."
+  short_description: "按个人风格输出口播版、文字版和简介"
+  default_prompt: "Use $personal-style-script-writer to turn my notes into a `口播版本`, a `文字版本`, and a `视频简介`, and add page markers when the spoken version will be paired with visuals."
 
 policy:
   allow_implicit_invocation: true

@@ -7,6 +7,7 @@ Use this reference when the user asks for any combination of:
 - give me a revised full version
 - help me name this article or post
 - mark page breaks for recording, slides, or image-text cards
+- create a short video description or summary blurb
 
 ## Default Response Shape
 
@@ -17,11 +18,12 @@ If the user asks for both critique and revision, prefer this order:
 3. Why each point matters
 4. `口播版本`
 5. `文字版本`
-6. Title options
+6. `视频简介`
+7. Title options
 
 If the user later says "just give me the revised full version" or "just mark the page breaks," stop explaining and give only that.
 
-If the user does not specify only one format, assume they want both a spoken version and a written version.
+If the user does not specify only one format, assume they want a spoken version, a written version, and a short video description.
 
 ## How To Review This User's Scripts
 
@@ -45,7 +47,7 @@ Avoid inflated theory language or generic writing advice.
 
 ## Page Marker Rule
 
-When the user wants a page-based script, output the revised script with explicit page markers.
+When the user wants a page-based script, or when you are generating a `口播版本`, output the revised script with explicit page markers by default.
 
 Preferred format:
 
@@ -53,6 +55,7 @@ Preferred format:
 - `【第2页：焦虑】`
 
 Use the user's own page labels when available.
+If the user does not provide page labels, infer them and make sure every page has a short extracted title.
 
 ## Spoken Vs Written Split
 
@@ -60,7 +63,8 @@ Use the user's own page labels when available.
 
 - keep spoken rhythm
 - preserve breath-sized sentence flow
-- include page markers when the content is paired with visuals
+- include page markers by default
+- give every page a short extracted title
 - allow small repetition when it helps performance
 
 `文字版本` should:
@@ -69,6 +73,13 @@ Use the user's own page labels when available.
 - remove unnecessary口语停顿感
 - read more smoothly as a post, article, or note
 - stay aligned with the page logic even if page markers are removed
+
+`视频简介` should:
+
+- be noticeably shorter than the `文字版本`
+- preserve the core tension and purpose of the piece
+- read like a concise post summary or video caption
+- avoid turning into a title list or hashtag dump unless the user asks
 
 ## Titles
 

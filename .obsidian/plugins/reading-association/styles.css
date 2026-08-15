@@ -1,0 +1,192 @@
+.reading-association-view {
+  --ra-gap: 14px;
+  padding: 18px;
+}
+
+.reading-association-view .ra-header {
+  margin-bottom: 16px;
+}
+
+.reading-association-view .ra-title-row {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.reading-association-view .ra-title-row h2 {
+  margin: 0;
+}
+
+.reading-association-view .ra-icon,
+.reading-association-view .ra-success-icon {
+  display: inline-flex;
+  color: var(--interactive-accent);
+}
+
+.reading-association-view .ra-subtitle,
+.reading-association-view .ra-help,
+.reading-association-view .ra-field small {
+  color: var(--text-muted);
+}
+
+.reading-association-view .ra-subtitle {
+  margin: 6px 0 0;
+}
+
+.reading-association-view .ra-progress {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 6px;
+  margin-bottom: 18px;
+}
+
+.reading-association-view .ra-progress-step {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  color: var(--text-faint);
+}
+
+.reading-association-view .ra-progress-step.is-active {
+  color: var(--text-normal);
+}
+
+.reading-association-view .ra-progress-number {
+  display: inline-grid;
+  place-items: center;
+  width: 22px;
+  height: 22px;
+  border-radius: 999px;
+  background: var(--background-modifier-border);
+}
+
+.reading-association-view .ra-progress-step.is-active .ra-progress-number {
+  color: var(--text-on-accent);
+  background: var(--interactive-accent);
+}
+
+.reading-association-view .ra-target,
+.reading-association-view .ra-mode {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  gap: 8px;
+  padding: 10px 12px;
+  border: 1px solid var(--background-modifier-border);
+  border-radius: var(--radius-s);
+  background: var(--background-secondary);
+}
+
+.reading-association-view .ra-target strong {
+  overflow-wrap: anywhere;
+}
+
+.reading-association-view .ra-mode span:last-child {
+  color: var(--color-green);
+}
+
+.reading-association-view .ra-warning {
+  margin-top: 10px;
+  padding: 10px 12px;
+  border-left: 3px solid var(--color-orange);
+  background: var(--background-secondary);
+}
+
+.reading-association-view .ra-field {
+  display: grid;
+  gap: 7px;
+  margin-top: var(--ra-gap);
+}
+
+.reading-association-view .ra-field label {
+  font-weight: var(--font-medium);
+}
+
+.reading-association-view .ra-field input,
+.reading-association-view .ra-field textarea {
+  width: 100%;
+}
+
+.reading-association-view .ra-field textarea {
+  resize: vertical;
+}
+
+.reading-association-view .ra-selected-block {
+  display: grid;
+  gap: 5px;
+  padding: 10px 12px;
+  border-left: 3px solid var(--interactive-accent);
+  background: var(--background-secondary);
+}
+
+.reading-association-view .ra-selected-block strong,
+.reading-association-view .ra-selected-block span {
+  overflow-wrap: anywhere;
+}
+
+.reading-association-view .ra-selected-block span {
+  color: var(--text-muted);
+}
+
+.reading-association-view .ra-summary {
+  margin-top: var(--ra-gap);
+  padding: 12px;
+  border-left: 3px solid var(--interactive-accent);
+  background: var(--background-secondary);
+}
+
+.reading-association-view .ra-summary p {
+  margin: 8px 0 0;
+  white-space: pre-wrap;
+}
+
+.reading-association-view .ra-checkbox {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  margin-top: var(--ra-gap);
+}
+
+.reading-association-view .ra-actions {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: flex-end;
+  gap: 8px;
+  margin-top: 18px;
+}
+
+.reading-association-view .ra-preview {
+  margin-top: var(--ra-gap);
+}
+
+.reading-association-view .ra-preview pre {
+  max-height: 280px;
+  overflow: auto;
+  white-space: pre-wrap;
+}
+
+.reading-association-view .ra-success {
+  display: grid;
+  justify-items: start;
+  gap: 8px;
+  margin: 26px 0 18px;
+  padding: 18px;
+  border: 1px solid var(--background-modifier-border);
+  border-radius: var(--radius-m);
+  background: var(--background-secondary);
+}
+
+.reading-association-view .ra-success h3,
+.reading-association-view .ra-success p {
+  margin: 0;
+}
+
+.reading-association-view .ra-file-button {
+  padding: 0;
+  height: auto;
+  color: var(--link-color);
+  background: transparent;
+  box-shadow: none;
+  text-align: left;
+  overflow-wrap: anywhere;
+}
