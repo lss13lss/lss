@@ -1,7 +1,7 @@
 {
   "id": "reading-association",
   "name": "阅读联想",
-  "version": "0.2.0",
+  "version": "0.3.0",
   "minAppVersion": "1.5.0",
   "description": "从人的原始联想出发，讨论、印证并沉淀跨书认识。",
   "author": "lss",

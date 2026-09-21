@@ -27,6 +27,11 @@ module.exports = __toCommonJS(main_exports);
 var import_obsidian = require("obsidian");
 var VIEW_TYPE = "reading-association-view";
 var ASSOCIATION_HEADING = "## \u9605\u8BFB\u8054\u60F3";
+var DEFAULT_SETTINGS = {
+  apiBaseUrl: "https://api.deepseek.com",
+  model: "deepseek-v4-flash",
+  apiKey: ""
+};
 function emptyDraft() {
   return {
     sourceBook: "",
@@ -244,6 +249,10 @@ var ReadingAssociationView = class extends import_obsidian.ItemView {
     __publicField(this, "stage", "capture");
     __publicField(this, "draft", emptyDraft());
     __publicField(this, "targetFile", null);
+    __publicField(this, "discussionMessages", []);
+    __publicField(this, "discussionInput", "");
+    __publicField(this, "isRequesting", false);
+    __publicField(this, "requestError", "");
   }
   getViewType() {
     return VIEW_TYPE;
@@ -263,6 +272,10 @@ var ReadingAssociationView = class extends import_obsidian.ItemView {
     this.targetFile = file;
     this.stage = "capture";
     this.draft = emptyDraft();
+    this.discussionMessages = [];
+    this.discussionInput = "";
+    this.isRequesting = false;
+    this.requestError = "";
     this.draft.sourceBook = (_a = file == null ? void 0 : file.basename) != null ? _a : "";
     this.draft.excerpt = selection.trim();
     this.draft.sourceLine = line;
@@ -379,24 +392,54 @@ var ReadingAssociationView = class extends import_obsidian.ItemView {
   }
   renderDiscuss(parent) {
     const status = parent.createDiv({ cls: "ra-mode" });
-    status.createSpan({ text: "\u4EBA\u5DE5 AI \u534F\u4F5C\u6A21\u5F0F" });
+    status.createSpan({ text: this.plugin.settings.model });
     status.createSpan({ text: "\u4E0D\u68C0\u7D22\u65E7\u4E66" });
     const summary = parent.createDiv({ cls: "ra-summary" });
     summary.createEl("strong", { text: "\u4F60\u7684\u539F\u59CB\u5224\u65AD" });
     summary.createEl("p", { text: this.draft.originalThought });
-    parent.createEl("p", {
-      text: "\u590D\u5236\u4E0B\u9762\u7684\u4E0A\u4E0B\u6587\u53D1\u7ED9 Codex\u3002\u8BA8\u8BBA\u5B8C\u6210\u540E\uFF0C\u628A\u4F60\u8BA4\u4E3A\u6709\u4EF7\u503C\u7684 AI \u56DE\u590D\u8D34\u56DE\u6765\u3002",
-      cls: "ra-help"
-    });
-    const copyButton = parent.createEl("button", { text: "\u590D\u5236\u8BA8\u8BBA\u4E0A\u4E0B\u6587", cls: "mod-cta" });
-    copyButton.addEventListener("click", async () => {
-      await navigator.clipboard.writeText(this.buildDiscussionPrompt());
-      copyButton.setText("\u5DF2\u590D\u5236\uFF0C\u53EF\u4EE5\u53D1\u7ED9 Codex");
-      new import_obsidian.Notice("\u8BA8\u8BBA\u4E0A\u4E0B\u6587\u5DF2\u590D\u5236");
-    });
-    this.addTextarea(parent, "AI \u8BA8\u8BBA\u8BB0\u5F55", this.draft.aiDiscussion, (value) => {
-      this.draft.aiDiscussion = value;
-    }, "\u8BA8\u8BBA\u540E\u518D\u7C98\u8D34\uFF1B\u4E5F\u53EF\u4EE5\u7559\u7A7A\u3002", 8);
+    if (!this.discussionMessages.length) {
+      parent.createEl("p", {
+        text: "\u8BA9 AI \u5148\u590D\u8FF0\u4F60\u7684\u5224\u65AD\uFF0C\u5E76\u53EA\u63D0\u51FA\u4E00\u4E2A\u6700\u5173\u952E\u7684\u95EE\u9898\u3002",
+        cls: "ra-help"
+      });
+      const begin = parent.createEl("button", {
+        text: this.isRequesting ? "AI \u6B63\u5728\u601D\u8003\u2026" : "\u8BF7 AI \u5148\u56DE\u5E94",
+        cls: "mod-cta"
+      });
+      begin.disabled = this.isRequesting;
+      begin.addEventListener("click", () => void this.requestDiscussionReply());
+    } else {
+      const conversation = parent.createDiv({ cls: "ra-conversation" });
+      this.discussionMessages.forEach((message) => {
+        const bubble = conversation.createDiv({
+          cls: `ra-message ${message.role === "assistant" ? "is-assistant" : "is-user"}`
+        });
+        bubble.createEl("strong", { text: message.role === "assistant" ? "AI" : "\u6211" });
+        bubble.createEl("p", { text: message.content });
+      });
+      this.addTextarea(parent, "\u6211\u7684\u56DE\u7B54\u6216\u8865\u5145", this.discussionInput, (value) => {
+        this.discussionInput = value;
+      }, "\u6BCF\u6B21\u5148\u56DE\u5E94\u4E00\u4E2A\u95EE\u9898\uFF0C\u4E5F\u53EF\u4EE5\u7EE7\u7EED\u8865\u5145\u4F60\u7684\u5224\u65AD\u3002", 4);
+      const send = parent.createEl("button", {
+        text: this.isRequesting ? "AI \u6B63\u5728\u601D\u8003\u2026" : "\u7EE7\u7EED\u8BA8\u8BBA",
+        cls: "mod-cta"
+      });
+      send.disabled = this.isRequesting;
+      send.addEventListener("click", () => {
+        const value = this.discussionInput.trim();
+        if (!value) {
+          new import_obsidian.Notice("\u8BF7\u5148\u5199\u4E0B\u4F60\u7684\u56DE\u7B54\u6216\u8865\u5145");
+          return;
+        }
+        void this.requestDiscussionReply(value);
+      });
+    }
+    if (this.requestError) {
+      const warning = parent.createDiv({ text: this.requestError, cls: "ra-warning" });
+      const retry = warning.createEl("button", { text: "\u91CD\u8BD5" });
+      retry.disabled = this.isRequesting;
+      retry.addEventListener("click", () => void this.requestDiscussionReply());
+    }
     const verifyRow = parent.createEl("label", { cls: "ra-checkbox" });
     const verify = verifyRow.createEl("input", { type: "checkbox" });
     verify.checked = this.draft.needsVerification;
@@ -420,6 +463,35 @@ var ReadingAssociationView = class extends import_obsidian.ItemView {
       }
       this.render();
     });
+  }
+  async requestDiscussionReply(userMessage) {
+    if (this.isRequesting) return;
+    if (userMessage) {
+      this.discussionMessages.push({ role: "user", content: userMessage });
+      this.discussionInput = "";
+    }
+    this.isRequesting = true;
+    this.requestError = "";
+    this.render();
+    try {
+      const messages = [
+        { role: "system", content: this.buildDiscussionSystemPrompt() },
+        { role: "user", content: this.buildInitialDiscussionMessage() },
+        ...this.discussionMessages
+      ];
+      const reply = await this.plugin.completeDiscussion(messages);
+      this.discussionMessages.push({ role: "assistant", content: reply });
+      this.draft.aiDiscussion = this.discussionMessages.map((message) => {
+        const speaker = message.role === "assistant" ? "AI" : "\u6211";
+        return `**${speaker}**\uFF1A${message.content}`;
+      }).join("\n\n");
+    } catch (error) {
+      const message = error instanceof Error ? error.message : "AI \u8BF7\u6C42\u5931\u8D25";
+      this.requestError = `${message}\u3002\u8BF7\u68C0\u67E5\u201C\u8BBE\u7F6E \u2192 \u9605\u8BFB\u8054\u60F3\u201D\u4E2D\u7684\u6A21\u578B\u914D\u7F6E\u3002`;
+    } finally {
+      this.isRequesting = false;
+      this.render();
+    }
   }
   renderDistill(parent) {
     parent.createEl("p", {
@@ -509,14 +581,20 @@ var ReadingAssociationView = class extends import_obsidian.ItemView {
     textarea.addEventListener("input", () => onChange(textarea.value));
     field.createEl("small", { text: help });
   }
-  buildDiscussionPrompt() {
+  buildDiscussionSystemPrompt() {
     return [
-      "\u6211\u6B63\u5728\u8FDB\u884C\u4E00\u6B21\u9605\u8BFB\u8054\u60F3\u8BA8\u8BBA\u3002\u8BF7\u9075\u5B88\u4EE5\u4E0B\u89C4\u5219\uFF1A",
+      "\u4F60\u6B63\u5728\u534F\u52A9\u7528\u6237\u8FDB\u884C\u4E00\u6B21\u9605\u8BFB\u8054\u60F3\u8BA8\u8BBA\u3002\u8BF7\u4E25\u683C\u9075\u5B88\u4EE5\u4E0B\u89C4\u5219\uFF1A",
       "1. \u5148\u7406\u89E3\u5E76\u590D\u8FF0\u6211\u7684\u5224\u65AD\uFF0C\u4E0D\u8981\u4E3B\u52A8\u641C\u7D22\u6216\u63A8\u8350\u5176\u4ED6\u4E66\u7C4D\u3002",
       "2. \u901A\u8FC7\u7B80\u77ED\u63D0\u95EE\u5E2E\u52A9\u6211\u8BF4\u6E05\u695A\u8FD9\u79CD\u8054\u7CFB\uFF0C\u6BCF\u6B21\u4F18\u5148\u63A8\u8FDB\u4E00\u4E2A\u95EE\u9898\u3002",
       "3. \u5E2E\u6211\u68C0\u9A8C\u8FD9\u4E2A\u5224\u65AD\u662F\u7C7B\u6BD4\u3001\u89E3\u91CA\u3001\u56E0\u679C\u3001\u51B2\u7A81\u8FD8\u662F\u5176\u4ED6\u5173\u7CFB\u3002",
       "4. \u4E0D\u8981\u4E3A\u4E86\u8D5E\u540C\u800C\u8D5E\u540C\uFF1B\u6307\u51FA\u903B\u8F91\u8DF3\u8DC3\u3001\u9002\u7528\u8FB9\u754C\u548C\u53EF\u80FD\u7684\u53CD\u4F8B\u3002",
       "5. \u9664\u975E\u6211\u660E\u786E\u63D0\u51FA\uFF0C\u5426\u5219\u4E0D\u8981\u68C0\u7D22\u539F\u6587\u3002",
+      "6. \u56DE\u590D\u4FDD\u6301\u7B80\u77ED\uFF0C\u6BCF\u6B21\u53EA\u63A8\u8FDB\u4E00\u4E2A\u5173\u952E\u95EE\u9898\u3002",
+      "7. \u4F7F\u7528\u7EAF\u6587\u672C\u56DE\u590D\uFF0C\u4E0D\u4F7F\u7528 Markdown \u6807\u8BB0\u3002"
+    ].join("\n");
+  }
+  buildInitialDiscussionMessage() {
+    return [
       "",
       `\u5F53\u524D\u4E66\u7C4D\uFF1A${this.draft.sourceBook || "\u672A\u586B\u5199"}`,
       `\u5F53\u524D\u9605\u8BFB\u7247\u6BB5\uFF1A
@@ -535,8 +613,11 @@ var ReadingAssociationPlugin = class extends import_obsidian.Plugin {
   constructor() {
     super(...arguments);
     __publicField(this, "lastMarkdownFile", null);
+    __publicField(this, "settings", { ...DEFAULT_SETTINGS });
   }
   async onload() {
+    await this.loadSettings();
+    this.addSettingTab(new ReadingAssociationSettingTab(this.app, this));
     this.captureCurrentMarkdownFile();
     this.registerEvent(this.app.workspace.on("active-leaf-change", (leaf) => {
       const view = leaf == null ? void 0 : leaf.view;
@@ -559,6 +640,60 @@ var ReadingAssociationPlugin = class extends import_obsidian.Plugin {
   }
   async onunload() {
     this.app.workspace.detachLeavesOfType(VIEW_TYPE);
+  }
+  async loadSettings() {
+    this.settings = Object.assign({}, DEFAULT_SETTINGS, await this.loadData());
+  }
+  async saveSettings() {
+    await this.saveData(this.settings);
+  }
+  credentialSource() {
+    if (this.settings.apiKey.trim()) return "\u63D2\u4EF6\u8BBE\u7F6E\u4E2D\u7684 API Key";
+    if (this.readOpenCodeApiKey()) return "OpenCode \u7684 DeepSeek API Key";
+    return "\u5C1A\u672A\u627E\u5230 API Key";
+  }
+  async completeDiscussion(messages) {
+    var _a, _b, _c, _d, _e;
+    const apiKey = this.settings.apiKey.trim() || this.readOpenCodeApiKey();
+    if (!apiKey) throw new Error("\u6CA1\u6709\u627E\u5230 DeepSeek API Key");
+    const baseUrl = this.settings.apiBaseUrl.trim().replace(/\/+$/, "");
+    const model = this.settings.model.trim();
+    if (!baseUrl || !model) throw new Error("\u63A5\u53E3\u5730\u5740\u6216\u6A21\u578B\u540D\u79F0\u4E3A\u7A7A");
+    const response = await (0, import_obsidian.requestUrl)({
+      url: `${baseUrl}/chat/completions`,
+      method: "POST",
+      contentType: "application/json",
+      headers: { Authorization: `Bearer ${apiKey}` },
+      body: JSON.stringify({
+        model,
+        messages,
+        max_tokens: 4096,
+        reasoning_effort: "low",
+        stream: false
+      }),
+      throw: false
+    });
+    const body = response.json;
+    if (response.status >= 400) {
+      throw new Error(((_a = body.error) == null ? void 0 : _a.message) || `DeepSeek \u8BF7\u6C42\u5931\u8D25\uFF08${response.status}\uFF09`);
+    }
+    const content = (_e = (_d = (_c = (_b = body.choices) == null ? void 0 : _b[0]) == null ? void 0 : _c.message) == null ? void 0 : _d.content) == null ? void 0 : _e.trim();
+    if (!content) throw new Error("DeepSeek \u6CA1\u6709\u8FD4\u56DE\u53EF\u663E\u793A\u7684\u6587\u5B57");
+    return content;
+  }
+  readOpenCodeApiKey() {
+    var _a;
+    if (!import_obsidian.Platform.isDesktopApp) return "";
+    try {
+      const fs = require("fs");
+      const os = require("os");
+      const path = require("path");
+      const authPath = path.join(os.homedir(), ".local", "share", "opencode", "auth.json");
+      const auth = JSON.parse(fs.readFileSync(authPath, "utf8"));
+      return typeof ((_a = auth.deepseek) == null ? void 0 : _a.key) === "string" ? auth.deepseek.key.trim() : "";
+    } catch (e) {
+      return "";
+    }
   }
   async startSession(markdownView) {
     var _a;
@@ -653,5 +788,49 @@ var ReadingAssociationPlugin = class extends import_obsidian.Plugin {
     await this.app.vault.modify(related, relatedContent);
     await this.app.vault.modify(sourceFile, sourceContent);
     new import_obsidian.Notice(`\u5DF2\u5EFA\u7ACB\u7CBE\u786E\u94FE\u63A5\u5E76\u5199\u5165 ${sourceFile.basename}`);
+  }
+};
+var ReadingAssociationSettingTab = class extends import_obsidian.PluginSettingTab {
+  constructor(app, plugin) {
+    super(app, plugin);
+    __publicField(this, "plugin", plugin);
+  }
+  display() {
+    const { containerEl } = this;
+    containerEl.empty();
+    containerEl.createEl("h2", { text: "\u9605\u8BFB\u8054\u60F3 \xB7 AI \u8BBE\u7F6E" });
+    containerEl.createEl("p", {
+      text: `\u5F53\u524D\u51ED\u636E\uFF1A${this.plugin.credentialSource()}\u3002\u5BC6\u94A5\u4E3A\u7A7A\u65F6\uFF0C\u684C\u9762\u7AEF\u4F1A\u81EA\u52A8\u8BFB\u53D6 OpenCode \u7684\u672C\u5730\u914D\u7F6E\u3002`
+    });
+    new import_obsidian.Setting(containerEl).setName("\u63A5\u53E3\u5730\u5740").setDesc("DeepSeek \u5B98\u65B9 OpenAI \u517C\u5BB9\u63A5\u53E3\u3002").addText((text) => text.setPlaceholder(DEFAULT_SETTINGS.apiBaseUrl).setValue(this.plugin.settings.apiBaseUrl).onChange(async (value) => {
+      this.plugin.settings.apiBaseUrl = value.trim();
+      await this.plugin.saveSettings();
+    }));
+    new import_obsidian.Setting(containerEl).setName("\u6A21\u578B").setDesc("\u5F53\u524D\u4F7F\u7528 DeepSeek V4 Flash\u3002").addText((text) => text.setPlaceholder(DEFAULT_SETTINGS.model).setValue(this.plugin.settings.model).onChange(async (value) => {
+      this.plugin.settings.model = value.trim();
+      await this.plugin.saveSettings();
+    }));
+    new import_obsidian.Setting(containerEl).setName("API Key\uFF08\u53EF\u9009\uFF09").setDesc("\u7559\u7A7A\u65F6\u81EA\u52A8\u8BFB\u53D6 OpenCode\uFF1B\u53EA\u6709\u9700\u8981\u8986\u76D6\u5B83\u65F6\u624D\u586B\u5199\u3002").addText((text) => {
+      text.inputEl.type = "password";
+      text.setPlaceholder("\u7559\u7A7A\u5219\u4F7F\u7528 OpenCode \u914D\u7F6E").setValue(this.plugin.settings.apiKey).onChange(async (value) => {
+        this.plugin.settings.apiKey = value.trim();
+        await this.plugin.saveSettings();
+      });
+    });
+    new import_obsidian.Setting(containerEl).setName("\u6D4B\u8BD5\u8FDE\u63A5").setDesc("\u53D1\u9001\u4E00\u6761\u6781\u77ED\u8BF7\u6C42\uFF0C\u786E\u8BA4\u63A5\u53E3\u3001\u6A21\u578B\u548C\u5BC6\u94A5\u53EF\u7528\u3002").addButton((button) => button.setButtonText("\u6D4B\u8BD5").onClick(async () => {
+      button.setDisabled(true).setButtonText("\u6D4B\u8BD5\u4E2D\u2026");
+      try {
+        await this.plugin.completeDiscussion([
+          { role: "system", content: "\u53EA\u56DE\u590D OK\u3002" },
+          { role: "user", content: "\u6D4B\u8BD5\u8FDE\u63A5" }
+        ]);
+        new import_obsidian.Notice("DeepSeek \u8FDE\u63A5\u6210\u529F");
+      } catch (error) {
+        const message = error instanceof Error ? error.message : "\u8FDE\u63A5\u5931\u8D25";
+        new import_obsidian.Notice(message);
+      } finally {
+        button.setDisabled(false).setButtonText("\u6D4B\u8BD5");
+      }
+    }));
   }
 };

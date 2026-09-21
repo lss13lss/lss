@@ -1,0 +1,18 @@
+# macOS
+.DS_Store
+
+# Python
+__pycache__/
+*.pyc
+*.pyo
+
+# 运行时日志与缓存
+logs/
+*.log
+
+# 备份文件
+*.bak
+*.bak-*
+
+# 依赖
+node_modules/

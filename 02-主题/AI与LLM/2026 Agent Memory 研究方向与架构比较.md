@@ -13,6 +13,7 @@ tags:
 status: active
 related:
   - "[[05-成长/对话成长/上下文系统/CURRENT|个人上下文系统]]"
+  - "[[Agent 自进化飞轮：从 Harness 优化到工程闭环]]"
 ---
 
 # 2026 Agent Memory 研究方向与架构比较
@@ -192,4 +193,3 @@ LoCoMo、LongMemEval 的分数会被回答模型、judge、top-k、是否包含�
 | [Mi-Memory](https://arxiv.org/abs/2607.18975) | 厂商技术报告 | 生命周期、LiteMem、审计与部署 |
 | [AMA-Bench](https://arxiv.org/abs/2602.22769) | ICLR 2026 论文 | Agent 轨迹、因果记忆、工具化检索 |
 | [Governed Shared Memory](https://arxiv.org/abs/2606.24535) | 预印本＋生产案例 | 共享记忆的范围、时效、来源与治理 |
-
