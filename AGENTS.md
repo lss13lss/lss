@@ -11,9 +11,21 @@
 ## 整理与自查
 
 - 删除任何笔记前先留可恢复副本：`backups/obsidian-cleanup-YYYYMMDD/`（含 `整理前笔记与配置.zip` 与 `原始文件清单.json`），并记录到对应的整理记录页。
+- **注意区分「被 Git 跟踪」与「未跟踪」的文件**：被跟踪的删了能从历史找回，未跟踪的（虚拟环境、`.bak`、生成产物、运行日志）删掉就没了——这部分必须单独打包留档。
+- 删除文件一律移入废纸篓（`~/.Trash/`）而非 `rm`，并保留废纸篓目录名与备份包对应。
 - 合并笔记时把原笔记引用的截图一并迁到合并稿，否则图片会沦为孤儿文件。
-- 整理后用 `python3 tools/vault_check/check_links.py` 全库自查死链，孤儿附件检查见 `tools/vault_check/README.md`。
+- 整理后用 `python3 tools/vault_check/check_links.py` 一次自查死链与库卫生（孤儿附件、构建产物、系统垃圾、空目录、零字节与重复笔记），说明见 `tools/vault_check/README.md`。
 - 完成整理后按 `vault backup: YYYY-MM-DD HH:MM:SS` 的风格提交，并推送到 origin/main 供另一台设备同步。
+
+## 库内不该有的东西
+
+这个库在 Mac 与 Windows 两台设备间同步，所以只放内容，不放环境：
+
+- **虚拟环境**（`.venv/`、`venv/`）与 Python 构建产物（`__pycache__/`、`.pytest_cache/`、`*.egg-info/`）。虚拟环境写死了本机绝对路径，同步过去只会留下一个跑不起来的环境；需要时在目标设备重建。
+- **生成产物与运行日志**（如 skill 跑出来的示例文件、`logs/`）。
+- **系统垃圾**（`.DS_Store`、`._*`、`*.bak-*`）。
+
+以上均已在 `.gitignore` 中挡住，新装 skill 后请检查有没有带进 `.venv`。
 
 ## 本机 Git 限制
 

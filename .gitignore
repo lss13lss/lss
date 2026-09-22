@@ -1,10 +1,20 @@
 # macOS
 .DS_Store
+._*
 
 # Python
 __pycache__/
 *.pyc
 *.pyo
+
+# Python 虚拟环境与构建产物（跨系统不可用，绝不提交）
+.venv/
+venv/
+env/
+.pytest_cache/
+.mypy_cache/
+.ruff_cache/
+*.egg-info/
 
 # 运行时日志与缓存
 logs/
