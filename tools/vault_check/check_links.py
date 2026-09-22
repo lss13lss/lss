@@ -159,7 +159,12 @@ def check_hygiene(vault, all_files, scan_md, junk_dirs, junk_files, empty_dirs):
         )
         for f in sorted(os.listdir(att_dir)):
             fp = os.path.join(att_dir, f)
-            if os.path.isfile(fp) and f not in blob:
+            if not os.path.isfile(fp):
+                continue
+            # Obsidian 的 wikilink 常省略扩展名（[[attachments/xxx]] 指向 xxx.md），
+            # 因此「含扩展名」与「去扩展名」两种写法命中任意一种就算被引用。
+            stem = os.path.splitext(f)[0]
+            if f not in blob and stem not in blob:
                 orphans.append((f, os.path.getsize(fp)))
     print(f"\n[1] 孤儿附件（attachments/ 中无任何笔记引用）: {len(orphans)}")
     for f, s in orphans:
