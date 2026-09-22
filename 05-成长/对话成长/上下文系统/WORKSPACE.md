@@ -30,6 +30,7 @@ status: active
 | 导师对照记录 | `05-成长/对话成长/导师/` |
 | 原作者参考仓库 | `/Users/jiawangliang/konwledge base/context-infrastructure-reference/` |
 | 外置硬盘原始会话 | `/Volumes/KESU/AI_Context_Archive/raw_sessions/` |
+| 视频转写与剪辑 | 在另一台 Windows 设备上完成，沉淀后写入本 vault，经 Git 与 Mac 侧同步 |
 
 ## 保存规则
 
