@@ -12,7 +12,8 @@ import re
 import sys
 
 VAULT = "/Users/jiawangliang/konwledge base/lss"
-SKIP_DIRS = {".git", ".obsidian", ".trash", "backups", "tools", "skills"}
+INDEX_SKIP = {".git", ".obsidian"}          # 完全不进入
+SCAN_SKIP = {"backups", "tools", "skills"}  # 索引为目标，但不扫描其内部链接
 
 LINK_RE = re.compile(r"\[\[([^\[\]]+?)\]\]")
 
@@ -21,11 +22,14 @@ def main():
     md_files = []
     all_files = []
     for root, dirs, files in os.walk(VAULT):
-        dirs[:] = [d for d in dirs if d not in SKIP_DIRS]
+        # INDEX_SKIP：完全不进入；SCAN_SKIP：只索引（可作为链接目标），不扫描其内部链接
+        dirs[:] = [d for d in dirs if d not in INDEX_SKIP]
+        rel_root = os.path.relpath(root, VAULT)
+        scan = not any(part in SCAN_SKIP for part in rel_root.split(os.sep))
         for f in files:
             p = os.path.join(root, f)
             all_files.append(p)
-            if f.endswith(".md"):
+            if scan and f.endswith(".md"):
                 md_files.append(p)
 
     # basename -> 相对路径列表（含附件，Obsidian 对附件也按 basename 解析）
@@ -38,7 +42,7 @@ def main():
     rel_set = {os.path.splitext(os.path.relpath(p, VAULT))[0].lower() for p in all_files}
     folder_set = set()
     for root, dirs, files in os.walk(VAULT):
-        dirs[:] = [d for d in dirs if d not in SKIP_DIRS]
+        dirs[:] = [d for d in dirs if d not in INDEX_SKIP]
         for d in dirs:
             folder_set.add(os.path.relpath(os.path.join(root, d), VAULT).lower())
 
