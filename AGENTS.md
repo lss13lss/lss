@@ -27,12 +27,20 @@
 
 以上均已在 `.gitignore` 中挡住，新装 skill 后请检查有没有带进 `.venv`。
 
-## 本机 Git 限制
+## 本机 Git 与同步
 
-GitHub 的 22 端口在本机常被网络策略拦截（表现为 `Connection closed by ... port 22`）。改用 443 端口即可：
+GitHub 的 **22 端口在本机被网络策略拦截**（表现为 `Connection closed by ... port 22`）。已在本地配置 URL 改写，所有 `git@github.com:` 开头的地址自动走 443：
+
+```bash
+git config --local url."ssh://git@ssh.github.com:443/".insteadOf "git@github.com:"
+```
+
+配置后 `git push origin main`、`git pull` 以及 Obsidian Git 插件都能正常同步，无需每次手动指定端口。若换设备或重装，重新执行上面那条命令；未配置时的手动兜底：
 
 ```bash
 GIT_SSH_COMMAND="ssh -p 443" git push ssh://git@ssh.github.com:443/lss13lss/lss.git main
 ```
+
+同步前先 `git fetch` 检查另一端是否有新提交，避免非快进冲突。
 
 
