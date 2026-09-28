@@ -4,21 +4,21 @@
     "type": "split",
     "children": [
       {
-        "id": "d0279de4435a9696",
+        "id": "9540a6540c969232",
         "type": "tabs",
         "children": [
           {
-            "id": "a42632687818ef18",
+            "id": "e3384d5e1e9333f7",
             "type": "leaf",
             "state": {
               "type": "markdown",
               "state": {
-                "file": "04-读书/已读/《原子习惯》读书笔记.md",
+                "file": "04-读书/在读/《思考，快与慢》读书笔记.md",
                 "mode": "source",
                 "source": false
               },
               "icon": "lucide-file",
-              "title": "《原子习惯》读书笔记"
+              "title": "《思考，快与慢》读书笔记"
             }
           }
         ]
@@ -80,8 +80,7 @@
       }
     ],
     "direction": "horizontal",
-    "width": 207.5,
-    "collapsed": true
+    "width": 360.328125
   },
   "right": {
     "id": "e87de951e57a2f91",
@@ -159,7 +158,6 @@
             "state": {
               "type": "outline",
               "state": {
-                "file": "04-读书/已读/《原子习惯》读书笔记.md",
                 "followCursor": false,
                 "showSearch": false,
                 "searchQuery": ""
@@ -177,14 +175,23 @@
               "icon": "book-open-text",
               "title": "阅读联想"
             }
+          },
+          {
+            "id": "1757b07200947bc0",
+            "type": "leaf",
+            "state": {
+              "type": "git-view",
+              "state": {},
+              "icon": "git-pull-request",
+              "title": "Source Control"
+            }
           }
         ],
-        "currentTab": 4
+        "currentTab": 6
       }
     ],
     "direction": "horizontal",
-    "width": 286.31640625,
-    "collapsed": true
+    "width": 286.31640625
   },
   "left-ribbon": {
     "hiddenItems": {
@@ -199,37 +206,41 @@
       "bases:新建数据库": false
     }
   },
-  "active": "a42632687818ef18",
+  "active": "e3384d5e1e9333f7",
   "lastOpenFiles": [
+    "02-主题/思维方式/判断新技术的五层框架与 hype 机制.md",
+    "02-主题/思维方式/内卷的博弈结构与议价权.md",
+    "02-主题/内容创作/渠道与分发：触达、转化与 5000 订阅者.md",
+    "attachments/2026-09-28-课代表立正-Jev与判断力-转写全文_逐行.txt",
+    "attachments/2026-09-28-课代表立正-AI产品与渠道-转写全文_逐行.txt",
+    "03-项目/账号运营/多平台注册启动清单.md",
+    "01-日志/日报/2026-09-01-晚间交流原文.md",
+    "05-成长导航.md",
+    "AGENTS.md",
+    "04-读书导航.md",
+    "03-项目导航.md",
+    "02-主题导航.md",
+    "01-日志导航.md",
+    "00-知识库搭建方案.md",
+    "00-整理记录-2026-09-21.md",
+    "00-首页.md",
+    "00-使用规则.md",
+    "attachments/Clipboard_2025-07-11-18-45-49.png",
+    "attachments/Clipboard_2025-07-11-11-31-44.png",
+    "04-读书/已读/《原子习惯》读书笔记.md",
+    "04-读书/已读/置身事内.md",
+    "02-主题/内容创作/首推.md",
+    "02-主题/AI与LLM/MyContext：开源实现核验与认识修正（2026-09-25）.md",
+    "04-读书/在读/《思考，快与慢》读书笔记.md",
+    "01-日志/日报/2026-09-23-晚间交流原文.md",
+    "04-读书/已读/《深度工作》读书笔记.md",
     "04-读书/在读/《关键对话》读书笔记.md",
     "02-主题/AI与LLM/Agent 自进化飞轮：从 Harness 优化到工程闭环.md",
-    "04-读书/已读/《原子习惯》读书笔记.md",
     "04-读书/已读/《高效能人士的七个习惯》读书笔记.md",
-    "01-日志/日报/2026-09-01-晚间交流原文.md",
     "01-日志/日报/2026-08-31-晚间交流原文.md",
-    "05-成长/对话成长/会话记录/OBSERVATIONS.md",
-    "02-主题/工作方法/第一性原理.md",
-    "02-主题/工作方法/用数据与既有记忆交叉验证观点.md",
-    "05-成长/对话成长/会话记录/2026-08-31-从房地产视频到交叉验证与记忆沉淀.md",
     "attachments/2026-08-31-土地财政视频-转写全文_逐行.txt",
-    "tools/ai_context_observer/OBSERVER_PROMPT.md",
-    "tools/ai_context_archive/README.md",
-    "05-成长/习惯/原子习惯.md",
-    "notes/阅读联想精确链接测试-目标.md",
-    "notes/阅读联想精确链接测试-来源.md",
-    "04-读书导航.md",
     "attachments/Pasted image 20260415094743.png",
-    "04-读书/在读/置身事内.md",
-    "notes/阅读联想插件测试-20260806.md",
-    "AGENTS.md",
-    "ai coding.md",
-    "02-主题/AI与LLM/2026 Agent Memory 研究方向与架构比较.md",
-    "06-素材/零散记录/AI 使用中的能力复利.md",
-    "05-成长/对话成长/00-对话沉淀说明.md",
-    "表达习惯.md",
     "05-成长/对话成长",
-    "2026-07-12_date.md",
-    "2026-07-10_date.md",
     "未命名",
     "skills/personal-style-script-writer/agents/openai.yaml",
     "skills/personal-style-script-writer/agents",
@@ -239,10 +250,6 @@
     "07-模板",
     "06-素材/零散记录",
     "06-素材/截图灵感",
-    "06-素材/待整理",
-    "06-素材",
-    "attachments/Clipboard_2025-07-11-18-45-49.png",
-    "attachments/Clipboard_2025-07-11-11-31-44.png",
     "attachments/Clipboard_2025-07-24-09-38-28.png",
     "attachments/Clipboard_2025-07-22-09-38-06.png",
     "attachments/Clipboard_2025-07-23-11-18-10.png",
