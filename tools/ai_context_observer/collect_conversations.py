@@ -77,7 +77,21 @@ def collect_codex(
                 offset = 0
 
             metadata: dict[str, Any] = {"path": key, "messages": []}
+            response_messages: list[dict[str, Any]] = []
             with path.open("r", encoding="utf-8") as handle:
+                # The header is outside the incremental range on later runs.
+                try:
+                    header = json.loads(handle.readline())
+                    if header.get("type") == "session_meta":
+                        payload = header.get("payload", {})
+                        metadata.update(
+                            session_id=payload.get("session_id") or payload.get("id"),
+                            cwd=payload.get("cwd"),
+                            thread_source=payload.get("thread_source"),
+                            source=payload.get("source"),
+                        )
+                except json.JSONDecodeError:
+                    pass
                 handle.seek(offset)
                 for line in handle:
                     try:
@@ -92,8 +106,33 @@ def collect_codex(
                                 "session_id": payload.get("session_id") or payload.get("id"),
                                 "cwd": payload.get("cwd"),
                                 "thread_source": payload.get("thread_source"),
+                                "source": payload.get("source"),
                             }
                         )
+                        continue
+                    if event_type == "response_item" and payload.get("type") == "message":
+                        role = payload.get("role")
+                        if role not in {"user", "assistant"}:
+                            continue
+                        if role == "assistant" and payload.get("channel") != "final":
+                            continue
+                        text = "\n".join(
+                            part.get("text", "")
+                            for part in payload.get("content", [])
+                            if isinstance(part, dict) and isinstance(part.get("text"), str)
+                        ).strip()
+                        if role == "user" and text.startswith((
+                            "# AGENTS.md instructions", "<environment_context>",
+                            "<external_codex_apps_open_page>", "<turn_aborted>",
+                            "<user_instructions>",
+                        )):
+                            continue
+                        if is_new_file and timestamp_from_iso(event.get("timestamp")) < cutoff:
+                            continue
+                        if text:
+                            response_messages.append(
+                                {"timestamp": event.get("timestamp"), "role": role, "text": text}
+                            )
                         continue
                     if event_type != "event_msg":
                         continue
@@ -115,12 +154,32 @@ def collect_codex(
                         )
 
             next_offsets[key] = size
-            if metadata.get("thread_source") in {"automation", "subagent"}:
+            if (metadata.get("thread_source") in {"automation", "subagent"}
+                    or isinstance(metadata.get("source"), dict)):
                 continue
+            # Older logs contain both representations. Prefer event messages
+            # when available so a turn is not observed twice.
+            if not metadata["messages"]:
+                metadata["messages"] = response_messages
             if any(message["role"] == "user" for message in metadata["messages"]):
                 sessions.append(metadata)
 
-    return sessions, next_offsets
+    # A rollout can exist in both active and archived roots.
+    by_session: dict[str, dict[str, Any]] = {}
+    for session in sessions:
+        session_key = session.get("session_id") or session["path"]
+        if session_key not in by_session:
+            by_session[session_key] = session
+            continue
+        existing = by_session[session_key]["messages"]
+        seen = {(m["timestamp"], m["role"], m["text"]) for m in existing}
+        for message in session["messages"]:
+            key = (message["timestamp"], message["role"], message["text"])
+            if key not in seen:
+                existing.append(message)
+                seen.add(key)
+        existing.sort(key=lambda m: m["timestamp"] or "")
+    return list(by_session.values()), next_offsets
 
 
 def collect_opencode(

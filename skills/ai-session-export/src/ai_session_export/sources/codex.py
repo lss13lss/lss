@@ -66,8 +66,10 @@ def parse_codex_session_file(file_path: Path, titles: dict[str, str]) -> ParsedC
     cwd = ""
     models: set[str] = set()
     messages: list[MessageTurn] = []
+    response_messages: list[MessageTurn] = []
     current_model: str | None = None
     pending_user_turns: list[int] = []
+    pending_response_user_turns: list[int] = []
     first_user_text = ""
     started_at: date | None = None
     latest_timestamp_ms = 0
@@ -106,9 +108,38 @@ def parse_codex_session_file(file_path: Path, titles: dict[str, str]) -> ParsedC
                     for index in pending_user_turns:
                         messages[index] = messages[index]._replace(model=model)
                     pending_user_turns.clear()
+                    for index in pending_response_user_turns:
+                        response_messages[index] = response_messages[index]._replace(model=model)
+                    pending_response_user_turns.clear()
                 cwd = str(payload.get("cwd") or cwd)
                 continue
 
+            if event_type == "response_item" and payload.get("type") == "message":
+                role = payload.get("role")
+                if role not in {"user", "assistant"}:
+                    continue
+                if role == "assistant" and payload.get("channel") != "final":
+                    continue
+                text = "\n".join(
+                    part.get("text", "")
+                    for part in payload.get("content", [])
+                    if isinstance(part, dict) and isinstance(part.get("text"), str)
+                ).strip()
+                if role == "user" and text.startswith((
+                    "# AGENTS.md instructions", "<environment_context>",
+                    "<external_codex_apps_open_page>", "<turn_aborted>",
+                    "<user_instructions>",
+                )):
+                    continue
+                if text:
+                    response_messages.append(MessageTurn(
+                        role=role, content=text, time_created=event_ts_ms, model=current_model
+                    ))
+                    if role == "user":
+                        pending_response_user_turns.append(len(response_messages) - 1)
+                    else:
+                        pending_response_user_turns.clear()
+                continue
             if event_type != "event_msg":
                 continue
 
@@ -131,6 +162,9 @@ def parse_codex_session_file(file_path: Path, titles: dict[str, str]) -> ParsedC
                     )
                 pending_user_turns.clear()
 
+    if not messages:
+        messages = response_messages
+        first_user_text = next((m.content for m in messages if m.role == "user"), "")
     if not session_id or not first_user_text or not messages or started_at is None:
         return None
 

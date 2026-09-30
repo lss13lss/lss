@@ -21,3 +21,7 @@ python3 tools/ai_context_observer/collect_conversations.py commit
 
 首次运行只读取最近 36 小时的对话，避免一次载入全部历史记录。后续运行根据
 文件偏移量和 OpenCode 消息游标增量读取。
+
+## 2026-09-30 采集兼容修复
+
+支持 Codex 的 `response_item` 消息格式；旧 `event_msg` 格式仍优先使用，避免双重计数。增量读取时重新读取文件头，保留 session id 和自动任务／子会话分类，不将后续自动任务误当人工对话。相同会话在活跃与归档目录中的副本按消息去重，所有文件仍各自维护游标。采集格式修复不会自动改写正式记忆，也不改变任务频率。

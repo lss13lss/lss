@@ -1417,3 +1417,34 @@ class TestLiveExport:
             pytest.skip("No recent Cursor sessions to export")
         assert len(files) == result["exported"]
         assert "source: cursor" in files[0].read_text(encoding="utf-8")
+
+
+def test_codex_response_item_format_and_legacy_precedence(tmp_path: Path) -> None:
+    path = tmp_path / "rollout-2026-09-30T09-00-00-fixture.jsonl"
+    events = [
+        {"type": "session_meta", "payload": {"id": "fixture", "cwd": "/home/user/project"}},
+        {"type": "turn_context", "payload": {"model": "fixture-model"}},
+        {"type": "response_item", "payload": {"type": "message", "role": "user",
+         "content": [{"type": "input_text", "text": "# AGENTS.md instructions\n配置"}]}},
+        {"type": "response_item", "payload": {"type": "message", "role": "user",
+         "content": [{"type": "input_text", "text": "当前项目B"}]}},
+        {"type": "response_item", "payload": {"type": "message", "role": "assistant", "channel": "analysis",
+         "content": [{"type": "output_text", "text": "内部推理"}]}},
+        {"type": "response_item", "payload": {"type": "message", "role": "assistant", "channel": "final",
+         "content": [{"type": "output_text", "text": "已记录"}]}},
+    ]
+    for event in events:
+        event["timestamp"] = "2026-09-30T09:00:00Z"
+    path.write_text("".join(json.dumps(e) + "\n" for e in events))
+    parsed = parse_codex_session_file(path, {})
+    assert parsed is not None
+    assert [(m.role, m.content) for m in parsed.record.messages] == [("user", "当前项目B"), ("assistant", "已记录")]
+    assert all(m.model == "fixture-model" for m in parsed.record.messages)
+    events += [
+        {"timestamp": "2026-09-30T09:00:00Z", "type": "event_msg", "payload": {"type": "user_message", "message": "当前项目B"}},
+        {"timestamp": "2026-09-30T09:00:01Z", "type": "event_msg", "payload": {"type": "agent_message", "message": "已记录"}},
+    ]
+    path.write_text("".join(json.dumps(e) + "\n" for e in events))
+    parsed = parse_codex_session_file(path, {})
+    assert parsed is not None
+    assert len(parsed.record.messages) == 2

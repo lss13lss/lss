@@ -1,5 +1,10 @@
 ## Changelog
 
+### 2026-09-30
+
+- Added Codex response-item message fallback for logs without user/agent event messages. Preserved legacy precedence to avoid duplicate turns; ignored setup messages, reasoning and non-final assistant channels.
+- Added synthetic coverage for response-item parsing, setup filtering and dual-format logs.
+
 ### 2026-08-12
 
 - Added the Cursor source adapter (`src/ai_session_export/sources/cursor.py`), registered in `sources/__init__.py`, `cli.py`, and `state.py` (`DEFAULT_STATE`).
