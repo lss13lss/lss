@@ -15,7 +15,7 @@ updated: 2026-10-11
 > [!abstract] 瓶颈不是生成代码，而是你信不信它产的；信任由「验证能力 + 技能 + 架构硬约束」三者堆出来
 > Lauren Tan（X 上叫 Potato，拼写带个 e，即 @poteto；Netflix → Meta React Compiler → Cursor → GrokBot）一小时分享的核心：**如果你连一个 agent 的输出都不信任，就不可能开出一百个**。她用五个月把信任曲线推到「今天醒来，agent 已自动合并约 20 个 PR，我在 main 上事后 review」的地步，前置代价是把 GrokBot 重构到 Dune 架构的 **600 多个 PR**。方法可拆成三件事：**让 agent 自己验证**（真跑应用、抓 trace 与堆快照、开模拟器）、**把经验编码成技能**（本质就是 markdown，效果等价于「把 agent 拉进另一个潜空间」）、**把约束写进架构与 CI 而非规范**（"最短的路径就是最好的路径"，因为 agent 天生爱抄近路）。
 
-本页由助手根据 2026-10-11 转写的 B 站视频整理：UP 主『小龙虾学长』《【Grok中配】2026-Lauren Tan详解xAI GrokBot实战》，时长 59 分 41 秒，[原始链接](https://www.bilibili.com/video/BV1MWtv6QENj/)。逐行原文见 [[attachments/2026-10-11-小龙虾学长-LaurenTan-GrokBot实战-转写全文_逐行.txt|attachments]]，英文原校准本见 [[attachments/2026-10-11-小龙虾学长-LaurenTan-GrokBot实战-英文原声_逐行.txt|attachments]]。**以下为视频讲者观点与实践方式的归纳，不是用户已确认的立场**；其中的吞吐数字建立在「AI 实验室 token 无限」的前提上，讲者本人也提示了 ROI 权衡。
+本页由助手根据 2026-10-11 转写的 B 站视频整理：UP 主『小龙虾学长』《【Grok中配】2026-Lauren Tan详解xAI GrokBot实战》，时长 59 分 41 秒，[原始链接](https://www.bilibili.com/video/BV1MWtv6QENj/)。逐行原文见 整理稿见 [[attachments/2026-10-11-小龙虾学长-LaurenTan-GrokBot实战-整理稿.md|整理稿]]，逐行原文见 [[attachments/2026-10-11-小龙虾学长-LaurenTan-GrokBot实战-转写全文_逐行.txt|逐行原文]]，带时间戳字幕见 [[attachments/2026-10-11-小龙虾学长-LaurenTan-GrokBot实战-字幕_带时间戳.srt|字幕]]，英文原校准本见 英文原声校准本见 [[attachments/2026-10-11-小龙虾学长-LaurenTan-GrokBot实战-英文原声_逐行.txt|英文原文]]。**以下为视频讲者观点与实践方式的归纳，不是用户已确认的立场**；其中的吞吐数字建立在「AI 实验室 token 无限」的前提上，讲者本人也提示了 ROI 权衡。
 
 ## 一、信任曲线：并行度是信任的函数，不是意志的函数
 
