@@ -4,7 +4,7 @@ aliases:
   - DeepSeek Harness 调研
   - dsh 架构分析
 created: 2026-08-14
-updated: 2026-08-31
+updated: 2026-11-02
 tags:
   - AI/Agent
   - AI/工具
@@ -17,6 +17,9 @@ related:
 ---
 
 # DeepSeek Harness：亮点、关键机制与成熟度边界
+
+> [!info] 后续专题与时间边界（2026-11-02 添加）
+> 本页主体保留 2026-08-14 的运行时调研和 2026-08-31 的用户原话，下方版本、成熟度与风险判断不代表已在 11 月重新验证。本次新增的持续任务编排专题见 [[DeepSeek Super Agent：架构、个人理解与纠偏]]；对应独立口述见 [[01-日志/日报/2026-11-02-Super Agent 理解口述原文]]。专题包含 Router／Worker、事件订阅、上下文、异步交互、Watchdog、批处理及 Jev 类比的纠偏。
 
 > [!abstract] 核心结论
 > DeepSeek Harness 的真正亮点不是“换了一个更聪明的模型”，而是把 Coding Agent 做成一个**可组合、可替换、可重放的运行时**：模型、工具、Agent Loop、Session Log、权限和 UI 都可以通过插件与配置进行替换。
