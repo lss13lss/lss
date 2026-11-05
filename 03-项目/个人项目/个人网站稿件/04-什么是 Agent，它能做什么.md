@@ -14,7 +14,7 @@ updated: 2026-11-05
 > [!info] 网站入门稿 · 已上线（2026-11-05）
 > 线上地址：http://122.51.126.188:8080/#/article/what-is-agent
 > 本站第 5 篇，`#/start` 第一步现指向这一篇；原《AI 为什么总要我重新解释？》保留，作为文末「继续阅读」。
-> 3 张手写 SVG（`what-is-agent-cover.svg` 封面、`agent-vs-chat.svg` 图 1、`agent-loop-steps.svg` 图 2）。11-05 本人选定「方案 1 · 不换工具、只重画」，已改为深色高对比、大字号、一张图只讲一件事；仍是纯文本 SVG，可进 Git。
+> 3 张配图（`what-is-agent-cover.webp` 封面、`agent-vs-chat.webp` 图 1、`agent-loop-steps.webp` 图 2）。11-05 本人最终拍板「**全文走 HTML**」：由 `figure-src/` 下的 HTML + 共用 `figure.css` 渲染、浏览器 2 倍截图、无损转 WebP；中文 100% 准确、无平台水印、改字重截即可。此前两版手写 SVG（含方案 1 深色重画）均被否定，旧文件保留作回退。
 > 11-05 补入「从 AI 到 Agent」一节（AI / LLM / 常见产品名），现为 8 节、2 张表格；本人要求平铺直叙，已去掉引导句、金句与「这篇适合」自述块。
 > 正文与本文件由同一份结构化数据生成，逐段一致；后续改稿须同步 `data.js` 与本文件。
 
@@ -55,7 +55,7 @@ AI 是领域，LLM 是处理文字的模型，对话产品把模型包成一个�
 
 > [!info] 配图 · 图 1
 > 图 1 · 同一句话，一边交付文字，一边交付一份待确认的方案
-> 网站图文件：`assets/agent-vs-chat.svg`（手写 SVG，源文件在 `~/WorkBuddy/2026-10-29-23-45-48/optimized-2026-10-30/assets/`）
+> 网站图文件：`assets/agent-vs-chat.webp`（HTML 渲染，源文件 `~/WorkBuddy/2026-10-29-23-45-48/optimized-2026-10-30/figure-src/agent-vs-chat.html`）
 >
 把两种交付放在一起看会更直观：一边交出一段文字，一边交出一件被推进、但还需要你确认的事。
 
@@ -79,7 +79,7 @@ AI 是领域，LLM 是处理文字的模型，对话产品把模型包成一个�
 
 > [!info] 配图 · 图 2
 > 图 2 · 一轮四步，以及结果写回记录、下一轮继续
-> 网站图文件：`assets/agent-loop-steps.svg`（手写 SVG，源文件在 `~/WorkBuddy/2026-10-29-23-45-48/optimized-2026-10-30/assets/`）
+> 网站图文件：`assets/agent-loop-steps.webp`（HTML 渲染，源文件 `~/WorkBuddy/2026-10-29-23-45-48/optimized-2026-10-30/figure-src/agent-loop-steps.html`）
 >
 关键在「核对结果」：工具返回的内容未必对，网页可能过期，文件也可能不是你要的那份。Agent 要判断这一步是否让自己更接近目标，然后决定继续、换方法，还是把问题交回给你。
 
