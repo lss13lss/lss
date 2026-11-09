@@ -17,7 +17,7 @@ Codex 和 OpenCode 在新会话首次实质任务中，先读取本入口，再�
 python3 "/Users/jiawangliang/konwledge base/lss/tools/read_context.py"
 ```
 
-默认输出 [[05-成长/对话成长/个人画像/COMMUNICATION#已确认|已确认的沟通约定]]，含来源路径和行号。在其他设备使用该 vault 内的 `tools/read_context.py`；命令不可用时直接读上述章节。两种方式都失败时，明确说明本轮缺了什么，继续能完成的部分。普通通用任务到此为止。
+默认输出 [[05-成长/对话成长/上下文系统/CARD|常驻卡片]]（当前事项实时取自 CURRENT）和 [[05-成长/对话成长/个人画像/COMMUNICATION#已确认|已确认的沟通约定]]，含来源路径和行号。在其他设备使用该 vault 内的 `tools/read_context.py`；命令不可用时直接读常驻卡片、CURRENT 当前目标及上述沟通章节。两种方式都失败时，明确说明本轮缺了什么，继续能完成的部分。普通通用任务到此为止。
 
 ## 按问题补读
 
